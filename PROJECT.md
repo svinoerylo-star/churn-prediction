@@ -4,12 +4,12 @@
 
 Educational ML engineering project covering data analysis, preprocessing,
 classification, evaluation, interpretation, and reproducibility.
-Follow `AGENTS.md`: communicate in Russian, explain decisions, provide progressive
+Follow `CLAUDE.md`: communicate in Russian, explain decisions, provide progressive
 syntax help, and let the student implement learning tasks. Editing code or
 installing dependencies requires explicit authorization. Maintain these memory
-files as instructed in `AGENTS.md`.
+files as instructed in `CLAUDE.md`.
 
-At session start, read `AGENTS.md`, this file, and `PROGRESS.md`, then inspect
+At session start, read `CLAUDE.md`, this file, and `PROGRESS.md`, then inspect
 relevant code. The notebook is the source of truth; memory may become outdated.
 
 ## Files and architecture

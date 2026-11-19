@@ -67,3 +67,15 @@ does not establish reliability on future customers.
 
 CatBoost, further feature ablations, threshold selection, hyperparameter search,
 and a fresh independent holdout have not been implemented.
+
+## Status update (2026-11-14)
+
+The Kaggle dataset investigation is closed: it is very likely synthetic, with
+different deterministic rules in the training and testing files (see
+`PROGRESS.md`). `data.ipynb` is kept as a finished EDA/diagnostic study.
+Further modeling stages (baseline, CatBoost, threshold selection,
+interpretation) will use the IBM Telco Customer Churn dataset in a new
+notebook. Layout for the Telco work has not been decided yet. Dataset file: extended IBM Telco xlsx (33 columns, 7,043 rows); see PROGRESS.md 2026-11-19.
+
+Repository: pushed to GitHub (`origin/main`). Datasets and `CLAUDE.md` are
+git-ignored; `README.md` links to the Kaggle source.

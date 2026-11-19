@@ -141,3 +141,55 @@ informative than planned, because deterministic rules exist in most features
 - Optional checks: `Total Spend` precision/binning (bin edges from train only);
   share of train rows covered by any 100%-churn rule; adversarial validation.
 - Function name typo (`comprassion` → `comparison`) not yet fixed.
+
+## 2026-11-14 — Decision: close Kaggle dataset, move to IBM Telco; Git set up
+
+- Student wrote a markdown conclusion (cell 49 of `data.ipynb`): high validation
+  AUC (0.96) vs testing (0.69–0.77) explained by differing deterministic rules
+  between files (e.g. `Payment Delay > 20` → 100% train churn; in train no
+  retained customer has `Monthly` contract). Claude suggested removing a leftover
+  copied phrase ("вот доказательства»"), stating the Monthly rule holds only for
+  train, and fixing typos; student considered the conclusion sufficient.
+  Whether these fixes were applied was not verified.
+- **Decision (option B):** stop modeling on the Kaggle dataset — it is very
+  likely synthetic, so CatBoost/threshold/interpretation results would be
+  meaningless. `data.ipynb` stays as a completed investigation. Next modeling
+  stages move to the IBM Telco Customer Churn dataset (Kaggle, ~7k rows) in a
+  **new notebook**.
+- Created `README.md` (title + dataset link; CSVs not in repo). Student is
+  expected to extend it with project description/conclusions.
+- Git: student initialized the repo, added `.gitignore` (`*.csv`, `.DS_Store`,
+  `.ipynb_checkpoints/`, `CLAUDE.md`), committed, and pushed to GitHub
+  (`origin/main`, 2 commits as of end of session). Student also replaced the
+  `AGENTS.md` reference in `PROJECT.md` with `CLAUDE.md`.
+- A personal Git cheat sheet was written to `~/git_guide.md` (outside the repo).
+- This PROGRESS/PROJECT update is uncommitted — commit and push it next session.
+
+### Where to resume
+
+1. Commit/push the updated `PROGRESS.md` and `PROJECT.md`.
+2. Start the Telco project: download the dataset, decide folder layout (new
+   notebook in this repo vs a separate repo — not decided), first look at data.
+   Known Telco pitfalls to let the student discover: `TotalCharges` stored as
+   string with blank values, class imbalance (~26% churn), `customerID` to drop,
+   correlated features (`tenure`, `MonthlyCharges`, `TotalCharges`).
+3. Follow the full workflow: split → baseline (LogReg pipeline) → CatBoost →
+   threshold selection on validation → interpretation. Keep a true held-out test
+   untouched this time.
+
+## 2026-11-19 — Telco dataset chosen
+
+- Student downloaded `Telco_customer_churn.xlsx` from Kaggle: the **extended IBM
+  Telco version** (7,043 rows, 33 columns, sheet `Telco_Churn`), not the classic
+  21-column `WA_Fn-UseC_-Telco-Customer-Churn.csv`. Student chose to use it.
+- Extra columns: `Count`, `Country`, `State`, `City`, `Zip Code`, `Lat Long`,
+  `Latitude`, `Longitude`, `Churn Label`, `Churn Value`, `Churn Score`, `CLTV`,
+  `Churn Reason`. Several are post-outcome/derived (leakage) — student's task is
+  to identify them; answers deliberately not given.
+- Reading requires `openpyxl` (not installed as of this session; student installs).
+- Proposed layout (not yet confirmed): `data/` folder for raw files, new
+  `telco_churn.ipynb`, optional `git mv data.ipynb kaggle_synthetic_eda.ipynb`.
+- Current task (stage 1): load, classify columns (target / drop with reason /
+  features), check dtypes vs meaning, hidden missing values, duplicates, class
+  balance; write findings in markdown without fixing. No split yet.
+- Previous PROGRESS/PROJECT updates still uncommitted at session start.
